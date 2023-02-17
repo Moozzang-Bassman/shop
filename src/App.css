@@ -1,6 +1,8 @@
 .nav-bar {
   height: 60px;
   background-color: #E0E0DE;
+  width: 100vw;
+
 
 }
 
@@ -11,7 +13,14 @@
 }
 
 .cardwrap {
-  margin-top: 30px;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
+  width: 100vw;
+  border-top: 1px solid lightgray;
+  padding-top: 60px;
+}
+
+.card :hover {
+  opacity: 0.9;
 }
