@@ -1,3 +1,15 @@
+.imgcontainer {
+  position: relative;
+  width: 300vw;
+  display: flex;
+  transform: translateX(-100vw);
+  transition: all 1s;
+}
+
+
+
+
+
 .nav-bar {
   height: 60px;
   background-color: #E0E0DE;
@@ -13,14 +25,54 @@
 }
 
 .cardwrap {
-  margin-top: 100px;
+  margin-top: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100vw;
   border-top: 1px solid lightgray;
   padding-top: 60px;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+
 }
 
 .card :hover {
   opacity: 0.9;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 20px 20px 0 0px;
+  margin: 0;
+
+}
+
+li {
+
+  margin-right: 30px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid;
+
+}
+
+
+select {
+  -webkit-appearance: none;
+  /* 크롬 화살표 없애기 */
+  -moz-appearance: none;
+  /* 파이어폭스 화살표 없애기 */
+  appearance: none
+    /* 화살표 없애기 */
+}
+
+
+
+
+
+
+
+input::placeholder {
+  color: black;
 }

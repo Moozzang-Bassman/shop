@@ -1,76 +1,145 @@
-import React from 'react'
-import { Navbar, Container, Card, Nav } from 'react-bootstrap';
+import React, { useEffect } from 'react'
+import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { GrTrash } from 'react-icons/gr'
+// import { useEffect } from 'react';
+import api from '../axios/api'
 
 
 
 const MainBg = styled.div`
-height: 65vh;
-background-image: url('https://www.nanamica.com/upload/main_visual_image/02031108_63dc6c9973d42.jpg');
+width:100vw;
+height: 75vh;
+background-image: url(${props => props.img});
 background-size: cover;
 background-position: center;
 /* cursor: pointer; */
 position: inherit;
+
 `
-// const StDiv = styled.div`
-// height: 60px;
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// gap: 10px;
-// font-size: .9rem;
-// font-weight: 500;
+const ImageContainer = styled.div`
+    position: static;
+  width: 300vw;
+  display: flex;
+   transform: ${(props) => `translateX(-${props.num}00vw)`};
+  transition: all .7s;
 
-// `
-// const TextContainer = styled.div`
-// width: 120px;
-// display: flex;
-// text-align: center;
-// justify-content: center;
-// align-items: center;
+`
+const ImageButton = styled.input`
+position: relative;
+  width: 15px;
+  height: 15px;
 
-// height: 60px;
-// /* border-bottom: 1px solid; */
-// /* &:hover {
-// border-bottom: 1px solid
-// } */
-// `
+  border-radius: 50%;
+  border: 1px solid white;
+`
 
-function Home(props) {
+function Home({ cloth, setCloth, fetchCloth }) {
+
+
+
+
+
     const navigate = useNavigate();
 
-    const data = props.data
 
-    // let [count, setCount] = useState(0);
+    const [imageNum, setImageNum] = useState(0);
+
+    const onDeleteButtonClickHandler = async (id) => {
+        await api.delete(`/cloth/${id}`);
+        setCloth(cloth.filter((item) => {
+            return item.id !== id;
+        }))
+
+    }
+    const foundItem = cloth?.filter((item) => {
+        return item.isdone === false
+    })
 
 
     return (
-        <div>
+
+        <div style={{
+            overflow: 'hidden'
+        }}>
+
+
+            <ImageContainer num={imageNum}>
 
 
 
-            <MainBg></MainBg>
 
-            <div className='cardwrap'>
-                {data.map((item) => {
+                <label>
+                    <MainBg img='https://www.nanamica.com/upload/main_visual_image/02101117_63e5a9509a210.jpg'
+                    >
+                    </MainBg>
+                </label>
+                <label>
+                    <MainBg img='https://www.nanamica.com/upload/main_visual_image/02031108_63dc6c9973d42.jpg'></MainBg>
+                </label>
+                <label>
+                    <MainBg img='https://www.nanamica.com/upload/main_visual_image/02101112_63e5a818dfe9f.jpg'></MainBg>
+
+                </label>
+            </ImageContainer>
+
+
+            <div style={{
+                position: 'relative',
+                bottom: '100px',
+                left: '80%',
+                display: 'flex',
+                gap: '1.5rem'
+
+            }}>
+                <ImageButton id='first' type='radio' name='slide' onClick={() => { setImageNum(0) }}></ImageButton>
+                <ImageButton id='second' type='radio' name='slide' onClick={() => { setImageNum(1) }}></ImageButton>
+                <ImageButton id='third' type='radio' name='slide' onClick={() => { setImageNum(2) }}></ImageButton>
+
+
+            </div>
+            <div style={{
+                marginTop: '50px',
+                letterSpacing: '-.02em',
+                fontWeight: '500',
+                fontSize: '1.6rem',
+                color: '#001233',
+                paddingLeft: '50px'
+            }}>WISH LIST</div>
+
+            <div className='cardwrap' >
+                {foundItem?.map((item) => {
                     return <Card onClick={() => {
+
                         navigate(`/detail/${item.id}`)
-                    }} className='card' key={item.id} style={{ width: '18rem', border: 'none', fontSize: '.8rem', cursor: 'pointer' }} >
+                    }} className='card' key={item.id} style={{ width: '25vw', border: 'none', fontSize: '.8rem', cursor: 'pointer' }} >
                         <Card.Img variant="top" src={item.image} />
                         <Card.Body>
                             <Card.Title style={{ fontSize: '1rem' }}>{item.title}</Card.Title>
                             <Card.Title style={{ fontSize: '1rem' }}>{item.price}YEN</Card.Title>
-                            <Card.Text>
-                                {item.content}
+                            <Card.Text style={{ display: 'flex', justifyContent: 'space-between', marginRight: '20px', }}>
+                                {item.content}<span
+
+                                ><GrTrash
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+
+                                        onDeleteButtonClickHandler(item.id)
+                                    }}
+
+                                    style={{ width: '15px', height: '15px', margin: '0px 10px' }}></GrTrash></span>
                             </Card.Text>
 
                         </Card.Body>
+
                     </Card>
                 })}
             </div>
-        </div>
+        </div >
+
     )
 }
 

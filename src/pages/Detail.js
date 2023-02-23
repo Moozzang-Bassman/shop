@@ -1,7 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
-import { BiShoppingBag } from 'react-icons/bi'
+import { BsBag } from 'react-icons/bs'
+import api from '../axios/api'
+import { useNavigate } from 'react-router-dom';
 
 const OrderButton = styled.button`
 background-color: #1A2848;
@@ -24,24 +26,37 @@ align-items: center;
 
 
 `
-function Detail(props) {
-    const data = props.data;
+
+function Detail({ cloth, fetchCloth }) {
+    const navigate = useNavigate();
 
     const { id } = useParams();
-    const foundData = data.find((x) => {
-        return x.id === +id
+    const foundData = cloth.find((x) => {
+        return x.id === +id;
     })
-    console.log(foundData)
-    // const foudData = data.find((x) => {
+    const onUdateButtonClickHandler = async () => {
+        await api.patch(`/cloth/${id}`, {
+            isdone: true
+        })
+        fetchCloth();
+        alert('장바구니에 담김')
+        if (window.confirm('장바구니로 이동하실래요?')) {
+            return navigate('/cart');
+        } else {
+            return navigate('/')
+        }
 
-    // })
+    }
+
+
     return (
+
         <div className="container" style={{
             borderBottom: '1px solid lightgray'
         }}>
             <div className="row">
                 <div className="col-md-6">
-                    <img src={foundData.image} width="100%" />
+                    <img src={foundData.image} width="100%" alt='clothingimg' />
                 </div>
                 <div className="col-md-6" style={{
                     lineHeight: '70px'
@@ -50,11 +65,15 @@ function Detail(props) {
                     <p>{foundData.content}</p>
                     <h4>¥&nbsp;{foundData.price}</h4>
 
-                    <OrderButton>ADD TO CART<BiShoppingBag style={{
+                    <OrderButton
+                        onClick={onUdateButtonClickHandler}
+                    >ADD TO CART<BsBag style={{
                         position: 'relative',
-                        left: '70px'
+                        left: '70px',
 
-                    }}></BiShoppingBag></OrderButton>
+
+
+                    }}></BsBag></OrderButton>
 
 
                 </div>
@@ -63,4 +82,4 @@ function Detail(props) {
     )
 }
 
-export default Detail
+export default Detail;

@@ -1,0 +1,52 @@
+{
+  "cloth": [
+    {
+      "title": "GORE-TEX Soutien Collar Coat",
+      "content": "nanamica",
+      "price": "77,000",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375d75e04c17.jpg",
+      "isdone": false,
+      "id": 2
+    },
+    {
+      "title": "ODU Jacket",
+      "content": "nanamica",
+      "price": "37,400",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375c30031da2.jpg",
+      "isdone": false,
+      "id": 3
+    },
+    {
+      "title": "Madras OX Big Work Shirt",
+      "content": "nanamica",
+      "price": "23,100",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375c16234c4a.jpg",
+      "isdone": true,
+      "id": 5
+    },
+    {
+      "title": "Mountain Wind Coat",
+      "content": "nanamica",
+      "price": "42,900",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375bfb81bc84.jpg",
+      "isdone": true,
+      "id": 7
+    },
+    {
+      "title": "Cargo Pants",
+      "content": "nanamica",
+      "price": "34,100",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375df0d8f1ca.jpg",
+      "isdone": false,
+      "id": 8
+    },
+    {
+      "title": "COOLMAX Jersey L/S Tee",
+      "content": "nanamica",
+      "price": "11,000",
+      "image": "https://www.nanamica.com/assets/product_class_image/6375e34970d5a.jpg",
+      "isdone": false,
+      "id": 9
+    }
+  ]
+}
